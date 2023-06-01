@@ -1,0 +1,45 @@
+.expense-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: cornsilk;
+    border:solid 2px black;
+    border-radius: 20px;
+    padding: 20px;
+    align-items: center;
+    
+}
+
+.expense-item_date{
+    font-size: 24px;
+    color: blue;
+    font-weight: bolder;
+
+}
+.expense-item_expense-details{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.expense-item_expense-details h2 {
+    font-size: 40px;
+    color: red;
+    padding: 0px;
+    margin: 0;
+}
+
+.expense-item_expense-details div {
+    font-size: 32px;
+    color: blue;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: aliceblue;
+}
+
+.primaryButton{
+    padding: 10px;
+    border-radius: 5px;
+    cursor:pointer;
+}

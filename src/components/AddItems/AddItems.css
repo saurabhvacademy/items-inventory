@@ -1,0 +1,9 @@
+.addItemContainer{
+    display: flex;
+    flex: row;
+    justify-content: space-evenly;
+   
+}
+.addItemContainer  input {
+    font-size: 18px;
+}
