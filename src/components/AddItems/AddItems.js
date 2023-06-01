@@ -2,8 +2,30 @@ import React from "react";
 import './AddItems.css'
 import DropDown from 'react-dropdown';
 import 'react-dropdown/style.css';
+import AddUnit from '../AddUnit/AddUnit';
+import Modal from 'react-modal'
 import { getAllUsers } from "../../services/apis.service";
+
+const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+  };
+
 function AddItems(props) {
+    const [modalIsOpen, setIsOpen] = React.useState(false);
+    function openModal() {
+        setIsOpen(true);
+      }
+
+      function closeModal() {
+        setIsOpen(false);
+      }
     const AllUsers = [{ value: '10 ltr', label: '10 ltr' }, { value: '20 ltr', label: '20 ltr' }];
     const defaultOption = AllUsers[0]
     return <div>
@@ -13,7 +35,7 @@ function AddItems(props) {
                 <div><input placeholder="Name of the item" type="text" /></div>
             </div>
             <div>
-                <div><label>Unit</label></div>
+                <div><label>Unit <button onClick={openModal} className="btn btn-primary">+</button></label></div>
                 <div><DropDown options={AllUsers} value={defaultOption} /></div>
             </div>
             <div>
@@ -40,6 +62,10 @@ function AddItems(props) {
         <div>
             <button>Save Item</button>
         </div>
+        <Modal style={customStyles}  isOpen={modalIsOpen}
+           contentLabel="Add Unit Modal">
+            <AddUnit></AddUnit>
+           </Modal>
     </div>
 
 }

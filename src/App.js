@@ -1,6 +1,7 @@
 
 import AddItem from "./components/AddItems/AddItems";
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
 
 function App() {
 
