@@ -1,0 +1,22 @@
+{
+    "unitsArr":[
+        {
+            "label":"1 Ltr",
+            "value":"1",
+            "baseUnit":"Ltr",
+            "id":0
+        },
+        {
+            "label":"4 Ltr",
+            "value":"4",
+            "baseUnit":"Ltr",
+            "id":1
+        },
+        {
+            "label":"10 Ltr",
+            "value":"10",
+            "baseUnit":"Ltr",
+            "id":2
+        }
+    ]
+}
