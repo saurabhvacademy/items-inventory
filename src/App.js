@@ -6,6 +6,13 @@ import initialUnits from "./initialData/units.json";
 import initialItems from "./initialData/items.json";
 import './App.css';
 import ShowGrid from "./components/UI/Grid";
+import {
+	BrowserRouter as Router,
+	Routes,
+	Route,
+	Link
+} from 'react-router-dom';
+
 
 function App() {
   const resetAll = () => {
@@ -23,6 +30,22 @@ function App() {
 
   units = JSON.parse(localStorage.getItem('units'));
   items = JSON.parse(localStorage.getItem('items'));
+  let idVsUnits = {};
+
+  if(units.length>0){
+    units.forEach(element => {
+      idVsUnits[element.id] = element;      
+    });
+
+  }
+  if(items.length>0 && units.length>0){
+    items.forEach((element) => { 
+      element.unitLabel = 
+      idVsUnits[element.unitId]? idVsUnits[element.unitId].label:'';      
+    });
+    console.log(items);
+
+  }
 
   let gridConfig = {
     cols: [
@@ -49,16 +72,20 @@ function App() {
       {
         key: 'salePrice',
         heading: 'SP'
+      },
+      {
+        key: 'unitLabel',
+        heading: 'Unit'
       }
     ]
   }
 
   return (
-    <div>Saurabh's first react App
-      {/* <Expenses expenses = {expenses} /> */}
-      <AddItem />
-      <button className="btn btn-danger move-to-bottom-right" onClick={resetAll}>RESET ALL</button>
-      <ShowGrid data={items} gridConfig={gridConfig}></ShowGrid>
+    <div className="app-container">Saurabh's first react App
+      <div className="add-item-container"><AddItem />
+      <button className="btn btn-danger move-to-bottom-right" onClick={resetAll}>RESET ALL</button></div>
+      
+      <div className="gridContainer"><ShowGrid data={items} gridConfig={gridConfig}></ShowGrid></div>
     </div>
 
   );

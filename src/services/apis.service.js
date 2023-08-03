@@ -1,5 +1,4 @@
-import axios from 'axios'
-
+import { getItemValidationObject} from "./clientSideValidations";
 
 export function getAllUnits() {
     const str =  localStorage.getItem("units");
@@ -18,6 +17,14 @@ export function addUnit(unit) {
 }
 
 export function addItem(item) {
+    const validationObject = getItemValidationObject(item);
+    for(const key in validationObject){
+        if(!validationObject[key]){
+            alert("wrong input");
+            return;
+        }
+    }
+   
     const str =  localStorage.getItem("items");
     const items = JSON.parse(str);
     item.id = items.length;

@@ -3,17 +3,33 @@ import React, { useState } from 'react';
 import './CustomDropDown.css';
 
 const CustomDropDown = (props) => {
-    const [totalBaughtCount, setBaughtCount] = useState("");
+    const [expand, setExpand] = useState("");
+    const [defaultValue, setDefaultValue] = useState(props.defaultValue);
     let idKey = props.idKey;
     let labelKey = props.labelKey
     let data = props.data;
-    let defaultValue = props.defaultValue;
-    let expand = false;
-    let toggledDisplayClass = 'displayNone'
-    let dropDownItems = data.map((element)=>{
-        return <div>{element[labelKey]}</div>
-    })
-    return <div><label>{defaultValue.label}</label><div className={toggledDisplayClass}>{dropDownItems}</div></div>
+    let heading = props.heading;
+
+    let toggleDropDown = function () {
+        setExpand(!expand);
+    }
+    let onSelect = props.onSelect;
+    let selectUnit = function(e){
+        data.forEach(element => {
+            if(element[idKey] === parseInt(e.target.id)){
+                setDefaultValue(element);
+                onSelect(e.target.id);
+                setExpand(!expand);
+            }
+            
+        });
+    }
+    return <div className="input-group input-group-sm mb-3">
+        <label className="input-group-text">{heading}</label>
+        <input readOnly className="form-control" value={defaultValue.label} onClick={toggleDropDown} />
+        <div className={`dropDiv ${expand ? '' : 'displayNone'}`}>{data.map((element) => {
+            return <div id={element[idKey]} onClick={selectUnit}>{element[labelKey]}</div>
+        })}</div></div>
 }
 
 export default CustomDropDown;
