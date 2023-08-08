@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import './AddItems.css'
-import DropDown from 'react-dropdown';
-import 'react-dropdown/style.css';
 import AddUnit from '../AddUnit/AddUnit';
 import Modal from 'react-modal'
 import { getAllUnits, addItem } from "../../services/apis.service";
@@ -10,14 +8,14 @@ import item from "../../initialData/itemModel.json"
 
 const customStyles = {
     content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
     },
-  };
+};
 
 function AddItems(props) {
     const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -29,91 +27,97 @@ function AddItems(props) {
     const [sellPrice, setSellPrice] = useState("");
     const [unitId, setUnitId] = useState("");
 
-    function onChangeValue(e){
+    function onChangeValue(e) {
         const value = e.target.value;
-        switch(e.target.id){
-            case 'name':setName(value);
-            break;
-            case 'hsn':setHsn(value);
-            break;
-            case 'totalBaught':setBaughtCount(value);
-            break;
-            case 'totalSold':setTotalSoldCount(value);
-            break;
-            case 'costPrice':setCostPrice(value);
-            break;
-            case 'salePrice':setSellPrice(value);
-            break;
+        switch (e.target.id) {
+            case 'name': setName(value);
+                break;
+            case 'hsn': setHsn(value);
+                break;
+            case 'totalBaught': if(value<totalSoldCount){
+                setBaughtCount(0);
+                alert("bought count can't be less than sold count");}
+                else setBaughtCount(value);
+                break;
+            case 'totalSold': setTotalSoldCount(value);
+                break;
+            case 'costPrice': setCostPrice(value);
+                break;
+            case 'salePrice': setSellPrice(value);
+                break;
+            default: return;
         }
     }
 
-    function onSelectUnit(id){
+    function onSelectUnit(id) {
         setUnitId(id);
     }
 
     function openModal() {
         setIsOpen(true);
-      }
+    }
 
-    const closeModal = function() {
+    const closeModal = function () {
         setIsOpen(false);
-      }
-      const saveItem = function() {
+    }
+    const saveItem = function () {
         item.HSN = HSN;
         item.costPrice = costPrice;
         item.name = name;
         item.salePrice = sellPrice;
         item.totalBaughtCount = totalBaughtCount;
         item.totalSoldCount = totalSoldCount;
-
+        item.unitId = unitId;
         addItem(item);
-      }
+    }
     let AllUnits = []
     AllUnits = getAllUnits();
     let labelVsUnits = {};
     AllUnits.forEach(unit => {
-        const key = unit.label+'';
-        labelVsUnits = {...labelVsUnits,key:unit}        
+        const key = unit.label + '';
+        labelVsUnits = { ...labelVsUnits, key: unit }
     });
-    const defaultOption = AllUnits[0]
     return <div>
         <div className="addItemContainer">
+            <div className="input-group input-group-sm mb-3">
+                <label className="input-group-text">Name</label>
+                <input id='name' className="form-control" onChange={onChangeValue} placeholder="Name of the item" type="text" />
+            </div>
+            
+            <div className="input-group input-group-sm mb-3">
+                <label className="input-group-text">HSN</label>
+                <input className="form-control" id="hsn" onChange={onChangeValue} type="text" />
+            </div>
+            <div className="input-group input-group-sm mb-3">
+                <label className="input-group-text">Baught</label>
+                <input className="form-control" id="totalBaught" onChange={onChangeValue} placeholder="Total baught till now" type="number" />
+            </div>
+            <div className="input-group input-group-sm mb-3">
+                <label className="input-group-text">Sold</label>
+                <input className="form-control" id="totalSold" onChange={onChangeValue} placeholder="Total sold till now" type="number" />
+            </div>
+            <div className="input-group input-group-sm mb-3">
+                <label className="input-group-text">CP</label>
+                <input className="form-control" id="costPrice" onChange={onChangeValue} placeholder="Cost Price per unit" type="number" />
+            </div>
+            <div className="input-group input-group-sm mb-3">
+                <label className="input-group-text">SP</label>
+                <input className="form-control" id="salePrice" onChange={onChangeValue} placeholder="Sale price per unit" type="number" />
+            </div>
             <div >
-                <div><label>Name</label></div>
-                <div><input id='name' onChange={onChangeValue} placeholder="Name of the item" type="text" /></div>
+                <CustomDropDown onSelect={setUnitId} heading={'Unit'} className="form-control" data={AllUnits} labelKey={'label'} idKey={'id'} defaultValue={AllUnits[0]} />
             </div>
-            <div>
-                <div><label>Unit <button onClick={openModal} className="btn btn-primary">+</button></label></div>
-                <div><CustomDropDown data={AllUnits} labelKey={'label'} idKey={'id'} defaultValue = {AllUnits[0]}/></div>
-            </div>
-            <div>
-                <div><label>HSN</label></div>
-                <div><input id="hsn" onChange={onChangeValue} type="text" /></div>
-            </div>
-            <div>
-                <div><label>Baught</label></div>
-                <div><input id="totalBaught" onChange={onChangeValue} placeholder="Total baught till now" type="number" /></div>
-            </div>
-            <div>
-                <div><label>Sold</label></div>
-                <div><input id="totalSold" onChange={onChangeValue} placeholder="Total sold till now" type="number" /></div>
-            </div>
-            <div>
-                <div><label>CP</label></div>
-                <div><input id="costPrice" onChange={onChangeValue} placeholder="Cost Price per unit" type="number" /></div>
-            </div>
-            <div>
-                <div><label>SP</label></div>
-                <div><input id="salePrice" onChange={onChangeValue} placeholder="Sale price per unit" type="number" /></div>
-            </div>
+           
         </div>
+        
         <div>
             <button className="btn btn-primary" onClick={saveItem}>Save Item</button>
+            <button onClick={openModal} className="btn btn-primary floatRight"> Add Unit </button>
         </div>
-        <Modal style={customStyles}  isOpen={modalIsOpen}
-           contentLabel="Add Unit Modal">
-            <AddUnit closeModalFunction = {closeModal}></AddUnit>
-           </Modal>
+        <Modal style={customStyles} isOpen={modalIsOpen}
+            contentLabel="Add Unit Modal">
+            <AddUnit closeModalFunction={closeModal}></AddUnit>
+        </Modal>
     </div>
 
 }

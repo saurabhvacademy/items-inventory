@@ -15,6 +15,8 @@
 .grid-header-row{
     font-weight: bold;
     font-size: 18px;
+    background-color: #444455;
+    color: #ffffff;
 }
 
 .data-cell, .header-cell{
@@ -22,4 +24,10 @@
     border-left: solid 1px black;
     padding: 5px;
     text-align: center;
+}
+.data-rows-container>div:nth-child(odd){
+    background-color: var(--background-color0);
+}
+.data-rows-container>div:nth-child(even){
+    background-color: var(--background-color4);
 }

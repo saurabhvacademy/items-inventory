@@ -1,6 +1,22 @@
 .displayNone {
     display: none;
 }
-.displayNone {
+.showDropDown {
     display: block;
+}
+.dropDiv {
+    position: absolute;
+    top: 30px;
+    width: 150px;
+    left: 52px;
+}
+.dropDiv > div{
+    cursor: pointer;
+}
+
+.dropDiv > div:nth-child(odd){
+    background-color: var(--background-color0);
+}
+.dropDiv>div:hover{
+    background-color: var(--background-color3);
 }

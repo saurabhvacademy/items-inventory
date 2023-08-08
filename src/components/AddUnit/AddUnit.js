@@ -6,6 +6,7 @@ import { addUnit } from "../../services/apis.service";
 function AddUnit(props) {
     const [unitValue, setUnitValue] = useState("");
     const [unitBase, setUnitBase] = useState("");
+    const closeModel = function(){props.closeModalFunction();}
     function handleUnitValueChange(e){
         setUnitValue(e.target.value)
     }
@@ -21,7 +22,7 @@ function AddUnit(props) {
     }
     return <div>
         <div>
-        <i className="fa fa-window-close" aria-hidden="true" onClick={()=>props.closeModalFunction()}></i>
+        <span className="fa fa-window-close" aria-hidden="true" onClick={closeModel}>X</span>
         </div>
         <div className="form-floating mb-3">
             <input type="text" onChange={handleUnitBaseChange} value={unitBase} className="form-control" id="label" placeholder="unit(kg,ltr, etc..)" />
