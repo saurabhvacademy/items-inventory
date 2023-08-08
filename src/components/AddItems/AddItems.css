@@ -1,9 +1,17 @@
 .addItemContainer{
     display: flex;
     flex: row;
-    justify-content: space-evenly;
+    justify-content: left;
+    flex-wrap: wrap;
    
 }
 .addItemContainer  input {
     font-size: 18px;
+    width: 100%;
+}
+
+.addItemContainer > div{
+    width: 200px;
+    height: auto;
+    margin-right: 20px;
 }

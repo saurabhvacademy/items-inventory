@@ -1,0 +1,16 @@
+{
+    "itemsArr":[
+        {
+            "id":0,
+            "name":"Demo name",
+            "label":"Demo name 0",
+            "value":0,
+            "unitId":0,
+            "HSN":"123456",
+            "totalBaughtCount":"10",
+            "totalSoldCount":"5",
+            "costPrice":"100",
+            "salePrice":"115"
+        }
+    ]
+}

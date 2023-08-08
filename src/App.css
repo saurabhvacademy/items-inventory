@@ -1,0 +1,48 @@
+.move-to-bottom-right {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
+.floatRight {
+  float: right;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+
+.add-item-container {
+
+  padding: 60px;
+}
+
+.app-container {
+  background-color: #ddddff;
+}
+
+.navigationBar {
+  display: flex;
+  justify-content: left;
+  list-style-type: none;
+  border-bottom: solid 2px #aaaaff;
+}
+
+.navigationBar div {
+  min-width: 150px;
+  /* border: solid 2px var(--background-color2);
+  border-bottom: none; */
+  text-align: center;
+  padding: 10px 0;
+}
+
+.navigationBar .liSelected{
+  background-color: var(--background-color4);
+  font-weight: bolder;
+  color: white;
+}
+.navigationBar div:hover{
+  background-color: var(--background-color3); 
+  cursor: pointer; 
+}
