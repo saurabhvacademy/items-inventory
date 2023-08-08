@@ -15,8 +15,8 @@
 }
 
 .dropDiv > div:nth-child(odd){
-    background-color: #eeeeee;
+    background-color: var(--background-color0);
 }
 .dropDiv>div:hover{
-    background-color: #aabbee;
+    background-color: var(--background-color3);
 }

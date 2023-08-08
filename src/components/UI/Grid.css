@@ -26,8 +26,8 @@
     text-align: center;
 }
 .data-rows-container>div:nth-child(odd){
-    background-color: #ddddff;
+    background-color: var(--background-color0);
 }
 .data-rows-container>div:nth-child(even){
-    background-color: #ddddee;
+    background-color: var(--background-color4);
 }
